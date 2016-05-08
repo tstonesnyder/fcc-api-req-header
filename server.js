@@ -21,19 +21,19 @@ app.route('/').get(function (req, res) {
   
   // GET IP ADDRESS OF USER:
   //console.log(`IP Address using req.ip = ${req.ip}`);
-  console.log(`IP Address using req.headers['x-forwarded-for'] = ${req.headers['x-forwarded-for']}`);
-  console.log(`IP Address using req.socket.remoteAddress = ${req.socket.remoteAddress}`);
+  //console.log(`IP Address using req.headers['x-forwarded-for'] = ${req.headers['x-forwarded-for']}`);
+  //console.log(`IP Address using req.socket.remoteAddress = ${req.socket.remoteAddress}`);
   result.ipaddress = req.ip;
 
   // GET LANGUAGE OF USER:
-  console.log(`Languages: ${req.headers['accept-language']}`);
+  //console.log(`Languages: ${req.headers['accept-language']}`);
   // Parse the Accept-Language header with a reg ex (returns all 2-char strings made of ltrs or dash):
   var langs = req.headers['accept-language'].match(/[a-zA-z\-]{2,10}/g) || [];
   // Get only the first language in the list
   result.language = langs[0] || "";
 
   // GET OPERATING SYSTEM OF USER:
-  console.log(`User-Agent string = ${req.headers['user-agent']}`);
+  //console.log(`User-Agent string = ${req.headers['user-agent']}`);
   // From the user-agent string, get the info from inside the first set of parentheses:
   var osString = req.headers['user-agent'].split(') ')[0].split(' (')[1];
   result.software = `${osString}`;
