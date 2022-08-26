@@ -19,7 +19,13 @@ var port = process.env.PORT || 8080;
 app.route('/').get(function (req, res) {
   var result = {}; 
   
+  // This is needed because Render.com apparently causes this to run with no real request to req object is empty.
+  // req = {};
+  if (Object.keys(req).length === 0) {
+    return res.json({msg: 'Starting up from Render?'});
+  }
   // GET IP ADDRESS OF USER:
+  // NOTE: ::1 is is the compressed format IPV6 loopback address 0:0:0:0:0:0:0:1. It's the equivalent of the IPV4 address 127.0.0.1 (localhost).
   //console.log(`IP Address using req.ip = ${req.ip}`);
   //console.log(`IP Address using req.headers['x-forwarded-for'] = ${req.headers['x-forwarded-for']}`);
   //console.log(`IP Address using req.socket.remoteAddress = ${req.socket.remoteAddress}`);
@@ -53,6 +59,6 @@ app.route('/').get(function (req, res) {
 });
   
 app.listen(port, function () {
-  console.log('Listening on port ' + port + '...');
+  console.log('Listening on port ' + port + '. If running locally, go to localhost:' + port);
 });
 
