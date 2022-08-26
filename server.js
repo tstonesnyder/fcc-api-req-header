@@ -48,6 +48,8 @@ app.route('/').get(function (req, res) {
 
   // Send result to user:
   res.json(result);
+  // Log for testing on Render.com
+  console.log(result);
 });
   
 app.listen(port, function () {
