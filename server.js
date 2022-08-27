@@ -20,9 +20,11 @@ app.route('/').get(function (req, res) {
   var result = {}; 
   
   // This is needed because Render.com apparently causes this to run with no real request to req object is empty.
+  // (req == null) will catch undefined or null, Object.keys... will catch empty object.
   // req = {};
-  if (Object.keys(req).length === 0) {
-    return res.json({msg: 'Starting up from Render?'});
+  // req = undefined
+  if (req == null || Object.keys(req).length === 0) {
+    return res.json({msg: 'req object is null. Are we starting up from Render?'});
   }
   // GET IP ADDRESS OF USER:
   // NOTE: ::1 is is the compressed format IPV6 loopback address 0:0:0:0:0:0:0:1. It's the equivalent of the IPV4 address 127.0.0.1 (localhost).
